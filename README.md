@@ -1,8 +1,12 @@
 ## one-icon
 
-one-Icon 是由阿里数据技术及产品部新能源前端团队开发的辅助 Iconfont 使用的工具。
+one-icon 是由阿里数据技术及产品部新能源前端团队开发的辅助 ifont 使用的工具。
 
-它提供如下功能：
+[![npm version](https://badge.fury.io/js/one-icon.png)](https://badge.fury.io/js/one-icon)
+[![npm downloads](https://img.shields.io/npm/dt/one-icon.svg?style=flat-square)](https://www.npmjs.com/package/one-icon)
+[![Gitter](https://badges.gitter.im/jasonHzq/one-icon.svg)](https://gitter.im/jasonHzq/one-icon?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
+one-icon 提供如下功能：
 
 1. 自动检测更新并一键生成项目中需要的最新 css、js 代码
 2. 采用了 Iconfont 的 font-class 和 symbol 方案，同时支持单色和多色 icon；
