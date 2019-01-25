@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "outDir": "lib",
+    "lib": ["es2015", "dom"]
+  },
+  "include": ["./icon.tsx"]
+}

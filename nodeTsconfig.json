@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "outDir": "bin",
+    "lib": ["es2015"]
+  },
+  "include": ["./src"],
+  "exclude": ["./src/styles/*"]
+}

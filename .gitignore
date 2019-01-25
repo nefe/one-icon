@@ -1,0 +1,7 @@
+node_modules
+lib/
+bin/
+package-lock.json
+src/styles/
+\.vscode/settings.json
+oneicon-config.json

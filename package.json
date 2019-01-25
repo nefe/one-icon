@@ -1,0 +1,42 @@
+{
+  "name": "one-icon",
+  "version": "0.3.12",
+  "description": "",
+  "main": "./lib/icon.js",
+  "bin": {
+    "icon": "index.js"
+  },
+  "scripts": {
+    "build": "tsc && tsc -p nodeTsconfig.json",
+    "dev": "tsc -p nodeTsconfig.json -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "icon"
+  ],
+  "files": [
+    "lib",
+    "bin",
+    "index.js",
+    "*.md",
+    "template.html",
+    "template.scss"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.104",
+    "@types/node-fetch": "^1.6.7",
+    "@types/react": "^16.3.14"
+  },
+  "peerDependencies": {
+    "react": "～16.2.0"
+  },
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "classnames": "^2.2.5",
+    "express": "^4.16.3",
+    "lodash": "^4.17.5",
+    "node-fetch": "^2.1.1"
+  }
+}

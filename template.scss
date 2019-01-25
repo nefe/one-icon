@@ -1,0 +1,46 @@
+/**
+ * @file 公共 Icon 自动生成
+ * @author @ali/icon
+ * @description 大家注意一下!! 不用在这里添加自己的代码。这个文件是自动生成的。
+ */
+<% const n = eot.length %>
+<% for (let i = 0; i < n; i++ ) { %>
+@font-face {
+  font-family: 'iconfont';
+  src: url('<%=eot[i]%>');
+  src: url('<%=eot[i]%>?#iefix') format('embedded-opentype'),
+    url('<%=woff[i]%>') format('woff'),
+    url('<%=ttf[i]%>') format('truetype'),
+    url('<%=svg[i]%>#iconfont') format('svg');
+}
+<% }; %>
+
+.one-icon <% _.forEach(classNameList, function(item) { %>
+  , .${item}
+<% }); %> {
+  font-family: 'iconfont' !important;
+  font-size: 13px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+
+  &::before {
+    font-family: 'iconfont' !important;
+  }
+}
+
+/** svg icon用于支持iconfont的svg版本 */
+.svg-one-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+<% _.forEach(icons, function(icon) { %>
+.icon-${icon.fontName}::before {
+  content: '\${icon.code}';
+}
+<% }); %>
