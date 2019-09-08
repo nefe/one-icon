@@ -1,239 +1,235 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="UTF-8" />
-  <title>
-    One Icon
-  </title>
-  <link rel="shortcut icon" href="//gtms04.alicdn.com/tps/i4/TB1_oz6GVXXXXaFXpXXJDFnIXXX-64-64.ico" type="image/x-icon">
-  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  <style>
-    h1 {
-      text-align: center;
-    }
-
-    .sync-btn {
-      border: 2px solid #6ed82d;
-      padding: 4px;
-      border-radius: 9px;
-      cursor: pointer;
-      color: #ffffff;
-      margin-left: 13px;
-      background: #83e83f;
-      font-weight: lighter;
-    }
-
-    body {
-      margin: 0;
-      padding: 20px;
-    }
-
-    .icons {
-      padding-top: 30px;
-    }
-
-    .icon {
-      min-width: 250px;
-      line-height: 32px;
-      padding-bottom: 20px;
-      display: inline-block;
-      position: relative;
-      font-size: 18px;
-      text-align: center;
-      border: 2px solid white;
-      color: #555555;
-    }
-
-    .icon .name {
-      text-align: center;
-      display: block;
-      font-size: 14px;
-      color: yellowgreen;
-      font-weight: bolder;
-    }
-
-    .icon i {
-      display: block;
-      font-size: 24px;
-    }
-
-    .svg-one-icon {
-      width: 24px;
-      height: 24px;
-      vertical-align: -0.15em;
-      fill: currentColor;
-      overflow: hidden;
-    }
-
-    .svg-btn {
-      color: #999;
-    }
-
-    button {
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    button+button {
-      margin-left: 4px;
-    }
-
-    textarea {
-      position: 'fixed';
-      top: '0px';
-      right: '0px';
-      width: '2em';
-      height: '2em';
-      padding: '0px';
-      border: 'none';
-      outline: 'none';
-      boxShadow: 'none';
-      background: 'transparent';
-    }
-  </style>
-
-</head>
-
-<body>
-  <div id="root"></div>
-  <script>
-    function flatten(arr) {
-      return arr.reduce(function (prev, next) {
-        return prev.concat(Array.isArray(next) ? flatten(next) : next)
-      }, [])
-    }
-
-    function copy(text) {
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      document.body.appendChild(textArea);
-
-      textArea.select();
-      let result = false;
-      try {
-        result = !!document.execCommand('copy');
-      } catch (err) { }
-
-      document.body.removeChild(textArea);
-      return result;
-    }
-
-    const Utils = {
-      copyIcon(fontName, type) {
-        let extraClasses = "<%=classNameList%>";
-        extraClasses = extraClasses.split(',').join(' ');
-        if (type === "svg") {
-          return copy('<Icon colorful type="one-icon icon-' + fontName + ' ' + extraClasses + '" />');
-        }
-
-        const meta = {
-          fontName,
-          extraClasses,
-        };
-
-        const iconCode = '<%=iconCode%>'.replace(/\{([^\\}]*(?:\\.[^\\}]*)*)\}/gm, function (match, key) {
-          key = key.trim();
-          
-          return meta[key] || '';
-        })
-        return copy(iconCode);
-      },
-      addJsFile(jsFile, cb) {
-        let script = document.getElementById('svg-js');
-        if (script) {
-          // 如果已经存在，移除重新加载最近的脚本
-          document.body.removeChild(script);
-        }
-
-        script = document.createElement('script');
-        script.id = 'svg-js';
-        script.src = 'https:' + jsFile;
-        document.body.appendChild(script);
-        script.onload = cb();
+  <head>
+    <meta charset="UTF-8" />
+    <title>
+      One Icon
+    </title>
+    <link
+      rel="shortcut icon"
+      href="//gtms04.alicdn.com/tps/i4/TB1_oz6GVXXXXaFXpXXJDFnIXXX-64-64.ico"
+      type="image/x-icon"
+    />
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <style>
+      h2 {
+        text-align: center;
       }
-    }
 
-  </script>
-  <script type="text/babel">
+      .sync-btn {
+        padding: 4px;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #ffffff;
+        margin-left: 13px;
+        background: #3f68e8;
+        font-weight: lighter;
+      }
+
+      body {
+        margin: 0;
+        padding: 20px;
+      }
+
+      .icons {
+        padding-top: 30px;
+      }
+
+      .icon {
+        min-width: 250px;
+        line-height: 32px;
+        padding-bottom: 20px;
+        display: inline-block;
+        position: relative;
+        font-size: 18px;
+        text-align: center;
+        border: 2px solid white;
+        color: #555555;
+      }
+
+      .icon .name {
+        text-align: center;
+        display: block;
+        font-size: 14px;
+        color: yellowgreen;
+        font-weight: bolder;
+      }
+
+      .icon i {
+        display: block;
+        font-size: 24px;
+      }
+
+      .svg-one-icon {
+        width: 24px;
+        height: 24px;
+        vertical-align: -0.15em;
+        fill: currentColor;
+        overflow: hidden;
+      }
+
+      .svg-btn {
+        color: #999;
+      }
+
+      button {
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button + button {
+        margin-left: 4px;
+      }
+
+      textarea {
+        position: 'fixed';
+        top: '0px';
+        right: '0px';
+        width: '2em';
+        height: '2em';
+        padding: '0px';
+        border: 'none';
+        outline: 'none';
+        box-shadow: 'none';
+        background: 'transparent';
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script>
+      function flatten(arr) {
+        return arr.reduce(function(prev, next) {
+          return prev.concat(Array.isArray(next) ? flatten(next) : next);
+        }, []);
+      }
+
+      function copy(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+
+        textArea.select();
+        let result = false;
+        try {
+          result = !!document.execCommand('copy');
+        } catch (err) {}
+
+        document.body.removeChild(textArea);
+        return result;
+      }
+
+      const Utils = {
+        copyIcon(fontName, option, type) {
+          let extraClasses = type === 'svg' ? option.svgClassNameList : option.classNameList;
+          let iconCode = type === 'svg' ? option.svgIconCode : option.iconCode;
+          extraClasses = extraClasses && extraClasses.join(' ');
+          if (!iconCode) {
+            return copy("<Icon type='icon-" + fontName + ' ' + (extraClasses || '') + "'>");
+          }
+          iconCode = iconCode.replace('{fontName}', fontName);
+          iconCode = iconCode.replace('{extraClasses}', extraClasses);
+          return copy(iconCode);
+        },
+        addJsFile(jsFile, cb) {
+          let script = document.getElementById('svg-js');
+          if (script) {
+            // 如果已经存在，移除重新加载最近的脚本
+            document.body.removeChild(script);
+          }
+
+          script = document.createElement('script');
+          script.id = 'svg-js';
+          script.src = 'https:' + jsFile;
+          document.body.appendChild(script);
+          script.onload = cb();
+        }
+      };
+    </script>
+    <script type="text/babel">
       const iconUrl = "http://www.iconfont.cn/open/project/detail.json";
       const refreshUrl = "http://www.iconfont.cn/open/project/cdn.json";
-      const projectIdList = [<%=projectIdList%>];
-      // const projectIdList = ["571987", "605375"];
+      const projectList = <%=projectList%>;
       /** 用于免登陆，http://gitlab.alibaba-inc.com/mm/iconfont-plus-egg/wikis/token-login */
       const uuid = "<%=uuid%>";
       const authUrl = "http://www.iconfont.cn/open/auth/" + uuid;
       const tokenUrl = "http://www.iconfont.cn/open/auth/check/" + uuid;
       /** 用于node端接受，自动更新文件的请求 */
       const reGenerateFileUrl = "/regenerateFile";
+
       class IconList extends React.Component {
         constructor(){
           super();
           this.state = {
-            projects: [],
-            icons: [],
-            fonts: [],
+            openStatus: {},
+            // key-map的形式
+            projectDetailList: this.initProjectDetailList(),
             /** 是否能自动更新，取决于是否能自动打开授权窗口*/
             canAutoRefresh: true
           }
         }
 
+        initProjectDetailList(){
+          let result = {};
+          projectList.forEach(project => {
+            const key = project.id;
+            result[key] = project;
+          })
+          return result;
+        }
+
         componentDidMount(){
-          this.getIconData();
+          this.getAllIconData();
           /** 每隔10分钟，自动去刷新数据，看是否数据需要更新 */
           setInterval(()=> {
-            this.getIconData();
+            this.getAllIconData();
           }, 1000*10*60);
         }
 
         componentWillUpdate(nextProps, nextState){
           if( nextState.canAutoRefresh ){
-            const project = nextState.project;
-            const shouldUpdate = project && project.font_is_old;
-            /** 自动更新 */
-            shouldUpdate && this.refresh();
+            const projectDetailList = nextState.projectDetailList;
+            Object.keys(projectDetailList).forEach(projectId => {
+              const project = projectDetailList[projectId];
+              const shouldUpdate = project.font_is_old
+              /** 自动更新 */
+              shouldUpdate && this.refreshByProjectId(projectId);
+            });
           }
+        }
+
+        getAllIconData(){
+          console.log('getAllIconData');
+          const { projectDetailList } = this.state;
+          Object.keys(projectDetailList).forEach(projectId => {
+            this.getIconDataById(projectId);
+          });
+          this.forceUpdate();
         }
 
         /** 获取Icon的所有数据 */
-        getIconData(){
-          let icons = [];
-          let projects = [];
-          let fonts = [];
-
-          projectIdList.forEach(id => {
-            return fetch(iconUrl  + "?pid=" + id)
-            .then((response) => {
-              return response.json();
-            }).then((myJson) => {
-              const data = myJson.data;
-              icons = [...icons, data.icons];
-              projects = [...projects, data.project];
-              fonts = [...fonts, data.font];
-              this.setState({
-                projects,
-                fonts: data.font,
-                icons: flatten(icons)
-              })
-              Utils.addJsFile(data.font.js_file, this.forceUpdate.bind(this));
-            });
+        getIconDataById(id){
+          console.log('getIconDataById', id);
+         fetch(iconUrl  + "?pid=" + id)
+          .then((response) => {
+            return response.json();
+          }).then((myJson) => {
+            const data = myJson.data;
+            console.log('icon 数据', data);
+            this.state.projectDetailList[id] = { ...this.state.projectDetailList[id], ...data};
+            Utils.addJsFile(data.font.js_file, this.forceUpdate.bind(this));
           });
         }
 
-        refresh() {
-          /** 判断是否正在更新中，避免二次更新 */
-          if(this.refreshing){
-            return;
-          }
-          this.refreshing = true;
+        refreshByProjectId(projectId) {
           /** 自动打开登录授权窗口 */
           if( !window.open(authUrl) ){
             this.setState({
               canAutoRefresh: false
             })
-            this.refreshing = false;
             return alert("由于您浏览器设置，无法为您进行自动更新！请点击手动更新！");
           }
 
@@ -243,55 +239,56 @@
           })
           .then(res=>{
             if(res.data && res.data.token){
-              this.getLastestData(res.data.token);
+              this.getLastestData(res.data.token, projectId);
             } else {
               alert("请先登录授权! ");
             }
-            this.refreshing = false;
           })
         }
 
-        getLastestData(token){
-          let formData = new FormData();
-          formData.append('pid', projectIdList[0]);
-
-          return fetch(refreshUrl + "?LG_TOKEN=" + token,{
+        getLastestData(token, id){
+          fetch(refreshUrl + "?LG_TOKEN=" + token,{
             method: "POST",
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: new URLSearchParams([["pid", projectIdList[0]]]).toString(),
+            body: new URLSearchParams([["pid", id]]).toString(),
           })
           .then((response) => {
-            this.getIconData();
+            console.log('重新请求项目数据', id);
+            this.getIconDataById(id);
             /** 通知node，重新获取最新的css、js文件 */
             fetch(reGenerateFileUrl)
               .catch(error => console.error('Error:', error));
-          })
+          });
+        }
+
+        changeOpenStatus(projectId){
+          const { openStatus } = this.state;
+          openStatus[projectId] = !openStatus[projectId];
+          this.setState({
+            openStatus: openStatus
+          });
         }
 
         render(){
-          const projects = this.state.projects;
-          const fonts = this.state.fonts;
-          const icons = this.state.icons;
-          const canAutoRefresh = this.state.canAutoRefresh;
-          const shouldUpdate = projects && projects.font_is_old;
-          const name = projects.map(project => project.name).join(' & ');
-
-          if( !fonts || !fonts.updated_at){
-            return null
-          }
-
-          return <div>
-            <h1> {name} </h1>
-            <h3>
-              最近更新时间：{fonts.updated_at && fonts.updated_at.slice(0, 10)}，目前{shouldUpdate?"不是": "是"}最新版本。
-              { !!shouldUpdate && <span className="sync-btn" onClick={() => this.refresh()} > 手动更新 </span> }
+          const { projectDetailList, openStatus } = this.state;
+          console.log('projectDetailList',projectDetailList);
+          return Object.keys(projectDetailList).map(projectId => {
+            const item = projectDetailList[projectId];
+            const { project, font, icons} = item;
+            if(!project) {
+              return null;
+            }
+            return (<div>
+            <h2> { project.name } </h2>
+            <h3> 最近更新时间：{font.updated_at && font.updated_at.slice(0, 10)}，目前{project.font_is_old?"不是": "是"}最新版本。
+              { !!project.font_is_old && <button className="sync-btn" onClick={() => this.refreshByProjectId(project.id)} > 手动更新 </button> }
+              <button className="sync-btn" onClick={() => this.changeOpenStatus(projectId)}> {openStatus[projectId]? '收起': '展开'} </button>
             </h3>
-            <div> 使用说明：单色Icon推荐使用Iconfont，多色Icon使用SVG方案。Icon组件请从@ali/icon导入。 </div>
             <div className="icons">
-              { icons.map((icon, index) => {
-                return <div className="icon" key={index}>
+              { icons && icons.map((icon, index) => {
+                return openStatus[projectId] && <div className="icon" key={index}>
                   <svg className="svg-one-icon" aria-hidden="true">
                     <use xlinkHref={"#icon-"+ icon.font_class}></use>
                   </svg>
@@ -299,19 +296,23 @@
                     {'icon-' + icon.font_class }
                   </span>
                   <span>
-                    <button onClick={() => Utils.copyIcon(icon.font_class)} > 复制Iconfont </button>
-                    <button onClick={() => Utils.copyIcon(icon.font_class, 'svg')} className="svg-btn"> 复制SVG </button>
+                    <button onClick={() => Utils.copyIcon(icon.font_class, {
+                      iconCode: item.iconCode,
+                      classNameList: item.classNameList
+                    })} > 复制Iconfont </button>
+                    <button onClick={() => Utils.copyIcon(icon.font_class, {
+                      svgClassNameList: item.svgClassNameList,
+                      svgIconCode: item.svgIconCode
+                    }, 'svg')} className="svg-btn"> 复制SVG </button>
                   </span>
-                </div>})
+                </div> })
               }
             </div>
-          </div>
+          </div>)});
         }
       }
 
       ReactDOM.render(<IconList/>, document.getElementById('root'));
-
     </script>
-</body>
-
+  </body>
 </html>

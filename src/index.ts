@@ -1,84 +1,36 @@
 /**
- * @file 入口文件
- * @lastModified 20180524
+ * @description 入口文件
+ * @lastModified 20190201
  */
-import {
-  getConfig,
-  generateCssFile,
-  generateJsFile,
-  getUUID,
-  generateAssets
-} from './utils';
-import { getProjectDetail } from './API';
+import { generateCssFile, generateJsFile } from './generateFile';
 import * as log from './log';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as _ from 'lodash';
+import { getUUID } from './uuid';
+import { getProjectList } from './data';
+import { getConfig } from './config';
 const express = require('express');
 
-const config = getConfig();
-const { projectIdList, classNameList, iconCode } = config;
-
+/** 是否是私有云发布，是的话把cdn的资源下载到本地 */
 const envType = process.argv[2];
+const isPrivateEnv = envType === 'private';
+const projectList = getProjectList();
 
 async function generateFiles() {
   try {
-    const detail = await getProjectDetail(projectIdList);
-    const { eot, ttf, svg, woff, icons, jsFile } = detail;
-
-    if (envType === 'private') {
-      /** 生成CSS文件 */
-      const cssOutputPath = config.getCssOutputPath();
-      await generateCssFile(cssOutputPath, {
-        icons,
-        eot: ['./font.eot'],
-        ttf: ['./font.ttf'],
-        svg: ['./font.svg'],
-        woff: ['./font.woff'],
-        classNameList
-      });
-      try {
-        await generateAssets(cssOutputPath, {
-          eot: eot[0],
-          ttf: ttf[0],
-          svg: svg[0],
-          woff: woff[0]
-        });
-      } catch (e) {
-        log.error("Failed in generating files: ");
-        throw Error(e);
-      }
-      // 生成资源文件
-      log.info(cssOutputPath + '文件生成成功！');
-
-      /** 生成JS文件 */
-      const jsOutputPath = config.getJsOutputPath();
-      await generateJsFile(jsOutputPath, { jsFile });
-      log.info(jsOutputPath + '文件生成成功！');
-    } else {
-      /** 生成CSS文件 */
-      const cssOutputPath = config.getCssOutputPath();
-
-      await generateCssFile(cssOutputPath, {
-        icons,
-        eot,
-        ttf,
-        svg,
-        woff,
-        classNameList
-      });
-      log.info(cssOutputPath + '文件生成成功！');
-      /** 生成JS文件 */
-      const jsOutputPath = config.getJsOutputPath();
-      await generateJsFile(jsOutputPath, { jsFile });
-      log.info(jsOutputPath + '文件生成成功！');
-    }
+    log.info('开始生成CSS文件...');
+    await generateCssFile(projectList, isPrivateEnv);
+    console.log('-------------------');
+    log.info('开始生成JS文件...');
+    await generateJsFile(projectList);
   } catch (e) {
     log.error(e);
     throw Error(e);
   }
 }
 
+/** 生成本地的页面，用于显示、复制代码、自动更新等 */
 async function createServer() {
   var app = express();
   const template = fs.readFileSync(
@@ -89,24 +41,24 @@ async function createServer() {
   const randomString = 'OneIcon' + Math.random();
   const uuid = getUUID(randomString);
   const content = _.template(template)({
-    projectIdList,
-    classNameList,
     uuid,
-    iconCode
+    projectList: JSON.stringify(getConfig().projectList)
   });
 
   app.get('/', (req, res) => res.send(content));
   app.listen(3000, () =>
-    log.info('icon文档启动成功！请前往http://127.0.0.1:3000查看')
+    log.warn('icon文档启动成功！请前往http://127.0.0.1:3000查看')
   );
-  app.use('/regenerateFile', function(req, res, next) {
+  /** 自动更新文件 */
+  app.use('/regenerateFile', function (req, res, next) {
     log.warn('---------正在加载最新数据--------------');
     generateFiles();
   });
 }
 
 async function main() {
-  if (envType === 'private') {
+  // 打包专有云的特殊处理
+  if (isPrivateEnv) {
     try {
       await generateFiles();
       process.exit(0);
