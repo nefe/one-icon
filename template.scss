@@ -1,24 +1,22 @@
-/**
- * @file 公共 Icon 自动生成
- * @author @ali/icon
- * @description 大家注意一下!! 不用在这里添加自己的代码。这个文件是自动生成的。
+/** 
+ * @author one-icon
+ * @description  iconfont文件，该文件由npm run icon自动生成，不可手动修改。
  */
-<% const n = eot.length %>
-<% for (let i = 0; i < n; i++ ) { %>
-@font-face {
-  font-family: 'iconfont';
-  src: url('<%=eot[i]%>');
-  src: url('<%=eot[i]%>?#iefix') format('embedded-opentype'),
-    url('<%=woff[i]%>') format('woff'),
-    url('<%=ttf[i]%>') format('truetype'),
-    url('<%=svg[i]%>#iconfont') format('svg');
-}
-<% }; %>
+   
+ @font-face {
+  /** 这里可以再iconfont中手动配置，如果一个项目中引入了多个iconfont项目，务必给每个项目设置不同的font-family */
+  font-family: '<%=familyName%>';
+  src: url('<%=eot%>');
+  src: url('<%=eot%>?#iefix') format('embedded-opentype'),
+    url('<%=woff%>') format('woff'),
+    url('<%=ttf%>') format('truetype'),
+    url('<%=svg%>#<%=familyName%>') format('svg');
+} 
 
-.one-icon <% _.forEach(classNameList, function(item) { %>
+.<%=familyName%> <% _.forEach(classNameList, function(item) { %>
   , .${item}
 <% }); %> {
-  font-family: 'iconfont' !important;
+  font-family: '<%=familyName%>' !important;
   font-size: 13px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
@@ -26,7 +24,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   &::before {
-    font-family: 'iconfont' !important;
+    font-family: '<%=familyName%>' !important;
   }
 }
 

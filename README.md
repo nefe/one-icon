@@ -48,12 +48,21 @@ npm i -S one-icon
 
 ```
 // 示例代码
-
 {
-  "projectIdList": ['12345', '23456'],    // Iconfont中的项目id列表
-  "cssOutputPath": "src/styles/oneicon.scss",  // 输出css文件的目录
-  "jsOutputPath": "src/styles/oneicon.js"      // 输出js文件的目录
-  "classNameList": ["dpicon"]    // Icon需要自带的样式
+  "projectList": [
+    {
+      "id": "138257",  // Iconfont中的项目id列表
+      "cssOutputPath": "src/styles/iconfont.scss", // 输出css文件的目录
+      "iconCode": "<i class='iconfont icon-{fontName} {extraClasses}'></i>", // Iconfont的模板，其中{fontName}表示字体类名，{extraClasses}表示样式类名，会自动替换
+      "classNameList": ["cssClassName"] // 额外添加的CSS样式类
+    },
+    {
+      "id": "936921",
+      "jsOutputPath": "src/styles/qbi-svg-icon.js", // 输出js文件的目录
+      "svgIconCode": "<svg class='svg-icon {extraClasses}' aria-hidden='true'><use xlink:href='#{fontName}'></use></svg>",  // SVG的模板
+      "svgClassNameList": ["svgClassName"]  // 额外添加的SVG样式类
+    }
+  ]
 }
 ```
 
@@ -75,7 +84,7 @@ npm i -S one-icon
 
 ### 常见问题
 
-- 运行 `icon` 出错
+- 运行 `npm run icon` 出错
 
 请仔细阅读报错信息，很有可能是配置出错；请确保你的 projectId 正确，你的路径存在。
 
