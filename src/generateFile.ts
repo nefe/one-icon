@@ -108,7 +108,7 @@ export async function generateCssFile(projectList, isPrivateEnv: boolean) {
         }
       }
 
-      const cssFileContent = _.template(cssTemplate)(item);
+      const cssFileContent = _.template(cssTemplate)({ classNameList: [], ...item });
 
       try {
         fs.writeFileSync(item.cssOutputPath, cssFileContent);

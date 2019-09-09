@@ -23,6 +23,10 @@ interface Project {
   classNameList?: string[];
   /** icon代码模板配置项 */
   iconCode?: string;
+  /** svg代码模板的样式类 */
+  svgClassNameList?: string[];
+  /** svg代码模板配置项 */
+  svgIconCode?: string;
 }
 
 /** 配置项 */
