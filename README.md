@@ -53,7 +53,7 @@ npm i -S one-icon
     {
       "id": "138257",  // Iconfont中的项目id列表
       "cssOutputPath": "src/styles/iconfont.scss", // 输出css文件的目录
-      "iconCode": "<i class='iconfont icon-{fontName} {extraClasses}'></i>", // Iconfont的模板
+      "iconCode": "<i class='iconfont icon-{fontName} {extraClasses}'></i>", // Iconfont的模板，其中{fontName}表示字体类名，{extraClasses}表示样式类名，会自动替换
       "classNameList": ["cssClassName"] // 额外添加的CSS样式类
     },
     {
