@@ -51,15 +51,23 @@ npm i -S one-icon
 {
   "projectList": [
     {
-      "id": "138257",  // Iconfont中的项目id列表
+      "id": "11111",  // Iconfont中的项目id列表
       "cssOutputPath": "src/styles/iconfont.scss", // 输出css文件的目录
-      "iconCode": "<i class='iconfont icon-{fontName} {extraClasses}'></i>", // Iconfont的模板，其中{fontName}表示字体类名，{extraClasses}表示样式类名，会自动替换
+      "iconCode": "<i class='iconfont icon-{fontName} {extraClasses}'></i>", // 展示界面复制Iconfont的模板，其中{fontName}表示字体类名，{extraClasses}表示样式类名，会自动替换
       "classNameList": ["cssClassName"] // 额外添加的CSS样式类
     },
     {
-      "id": "936921",
+      "id": "222",
       "jsOutputPath": "src/styles/qbi-svg-icon.js", // 输出js文件的目录
-      "svgIconCode": "<svg class='svg-icon {extraClasses}' aria-hidden='true'><use xlink:href='#{fontName}'></use></svg>",  // SVG的模板
+      "svgIconCode": "<svg class='svg-icon {extraClasses}' aria-hidden='true'><use xlink:href='#icon-{fontName}'></use></svg>",  // 展示界面复制SVG的模板
+      "svgClassNameList": ["svgClassName"]  // 额外添加的SVG样式类
+    },
+    ,
+    {
+      "id": "333",
+      "jsOutputPath": "src/styles/fbi-svg-icon.js", // 输出js文件的目录
+      "uniqueId": "fbi", // 多项目svg id重合时加上的id
+      "svgIconCode": "<svg class='svg-icon {extraClasses}' aria-hidden='true'><use xlink:href='#icon-fbi-{fontName}'></use></svg>",  // 展示界面复制SVG的模板，需要加上uniqueId
       "svgClassNameList": ["svgClassName"]  // 额外添加的SVG样式类
     }
   ]
@@ -71,16 +79,6 @@ npm i -S one-icon
 此时打开 127.0.0.1:3000 可以看到可视化的界面，界面上提供复制代码、自动检测、自动更新的功能。
 
 代码每隔 10 分钟检查一次是否是最新的样式代码，若不是则会自动更新，重新下载样式文件。
-
-### 使用 one-icon React 组件
-
-1.  在项目中引入生成的 css、js 文件
-
-2.  导入 Icon 组件`import { Icon } from 'one-icon';`
-
-3.  若是单色 Icon，引入方式为`<Icon type="one-icon icon-default" />`
-
-4.  若是多色 Icon，引入方式为`<Icon colorful type="one-icon icon-default" />`
 
 ### 常见问题
 

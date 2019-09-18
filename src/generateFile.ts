@@ -134,13 +134,20 @@ export async function generateJsFile(projectList) {
       }
       /** 确保配置了正确的路径 */
       processFolderPath(item.jsOutputPath);
+
+      const jsTemplate = fs.readFileSync(
+        path.join(__dirname, '../template.js'),
+        'utf8'
+      );
+      const jsFileContent = _.template(jsTemplate)({uniqueId: '',  ...item});
+
       try {
-        fs.writeFileSync(item.jsOutputPath, ' ');
+        fs.writeFileSync(item.jsOutputPath, jsFileContent);
       } catch (e) {
         log.error('Failed in generating JS file: ');
         throw Error(e);
       }
-      await fileDownload('http:' + item.jsFile.slice(6), item.jsOutputPath);
+      // await fileDownload('http:' + item.jsFile.slice(6), item.jsOutputPath);
       log.info(`${item.name}项目JS生成成功！`);
     });
   });
