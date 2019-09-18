@@ -21,7 +21,7 @@
     "*.md",
     "template.html",
     "template.scss",
-    "template.js",
+    "template.js"
   ],
   "author": "",
   "license": "ISC",
