@@ -66,7 +66,6 @@ export async function generateCssFile(projectList, isPrivateEnv: boolean) {
   const promises = projectList.map((project) => {
     return project.then(async item => {
       if (!item.cssOutputPath) {
-        // log.warn(`${item.name}项目未配置CSS路径!`);
         return;
       }
       processFolderPath(item.cssOutputPath);
@@ -129,7 +128,6 @@ export async function generateJsFile(projectList) {
     project.then(async item => {
       // 配置项提供了jsOutputPath，才支持下载JS文件
       if (!item.jsOutputPath) {
-        // log.warn(`${item.name}项目未配置JS路径！`);
         return;
       }
       /** 确保配置了正确的路径 */
