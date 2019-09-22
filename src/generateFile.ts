@@ -71,6 +71,7 @@ export async function generateCssFile(projectList, isPrivateEnv: boolean) {
       processFolderPath(item.cssOutputPath);
 
       if (isPrivateEnv) {
+        console.log('private env');
         try {
           const assetsMap = {
             eot: item.eot,
@@ -80,6 +81,7 @@ export async function generateCssFile(projectList, isPrivateEnv: boolean) {
           };
           // todo，路径要做适配性。
           const cssFileContent = _.template(cssTemplate)({
+            classNameList: [],
             ...item,
             eot: `../../assets/fonts/${item.name}-font.eot`,
             ttf: `../../assets/fonts/${item.name}-font.ttf`,
@@ -137,7 +139,7 @@ export async function generateJsFile(projectList) {
         path.join(__dirname, '../template.js'),
         'utf8'
       );
-      const jsFileContent = _.template(jsTemplate)({uniqueId: '',  ...item});
+      const jsFileContent = _.template(jsTemplate)({ uniqueId: '', ...item });
 
       try {
         fs.writeFileSync(item.jsOutputPath, jsFileContent);
