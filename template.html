@@ -62,7 +62,7 @@
         font-size: 24px;
       }
 
-      .svg-one-icon {
+      .svg-icon {
         width: 24px;
         height: 24px;
         vertical-align: -0.15em;
@@ -289,7 +289,7 @@
             <div className="icons">
               { icons && icons.map((icon, index) => {
                 return openStatus[projectId] && <div className="icon" key={index}>
-                  <svg className="svg-one-icon" aria-hidden="true">
+                  <svg className="svg-icon" aria-hidden="true">
                     <use xlinkHref={"#icon-"+ icon.font_class}></use>
                   </svg>
                   <span className="name">
