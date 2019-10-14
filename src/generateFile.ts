@@ -66,12 +66,12 @@ export async function generateCssFile(projectList, isPrivateEnv: boolean) {
   const promises = projectList.map((project) => {
     return project.then(async item => {
       if (!item.cssOutputPath) {
-        // log.warn(`${item.name}项目未配置CSS路径!`);
         return;
       }
       processFolderPath(item.cssOutputPath);
 
       if (isPrivateEnv) {
+        console.log('private env');
         try {
           const assetsMap = {
             eot: item.eot,
@@ -81,6 +81,7 @@ export async function generateCssFile(projectList, isPrivateEnv: boolean) {
           };
           // todo，路径要做适配性。
           const cssFileContent = _.template(cssTemplate)({
+            classNameList: [],
             ...item,
             eot: `../../assets/fonts/${item.name}-font.eot`,
             ttf: `../../assets/fonts/${item.name}-font.ttf`,
@@ -129,18 +130,24 @@ export async function generateJsFile(projectList) {
     project.then(async item => {
       // 配置项提供了jsOutputPath，才支持下载JS文件
       if (!item.jsOutputPath) {
-        // log.warn(`${item.name}项目未配置JS路径！`);
         return;
       }
       /** 确保配置了正确的路径 */
       processFolderPath(item.jsOutputPath);
+
+      const jsTemplate = fs.readFileSync(
+        path.join(__dirname, '../template.js'),
+        'utf8'
+      );
+      const jsFileContent = _.template(jsTemplate)({ uniqueId: '', ...item });
+
       try {
-        fs.writeFileSync(item.jsOutputPath, ' ');
+        fs.writeFileSync(item.jsOutputPath, jsFileContent);
       } catch (e) {
         log.error('Failed in generating JS file: ');
         throw Error(e);
       }
-      await fileDownload('http:' + item.jsFile.slice(6), item.jsOutputPath);
+      // await fileDownload('http:' + item.jsFile.slice(6), item.jsOutputPath);
       log.info(`${item.name}项目JS生成成功！`);
     });
   });

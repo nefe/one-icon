@@ -25,7 +25,7 @@ export class Icon extends React.Component<IconProps, any> {
       // type的写法可能为'one-icon icon-***'，正则匹配出icon-***
       const match = type.match(/icon-[^ ]*/);
       iconType = match ? match[0] : type;
-      const myClassNames=classNames("svg-one-icon", className)
+      const myClassNames=classNames("svg-icon", className)
       return (
         <svg
           className={myClassNames}

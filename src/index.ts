@@ -63,7 +63,7 @@ async function main() {
       await generateFiles();
       process.exit(0);
     } catch (e) {
-      console.error(e);
+      log.error(e);
       process.exit(1);
     }
     return;
