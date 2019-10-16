@@ -3,7 +3,7 @@
  * @description  iconfont文件，该文件由npm run icon自动生成，不可手动修改。
  */
 
-@font-face {
+ @font-face {
   /** 这里可以再iconfont中手动配置，如果一个项目中引入了多个iconfont项目，务必给每个项目设置不同的font-family */
   font-family: '<%=familyName%>';
   src: url('<%=eot%>');
@@ -13,17 +13,8 @@
     url('<%=svg%>#<%=familyName%>') format('svg');
 }
 
-.<%=familyName%><% _.forEach(classNameList, function(item) {
-    %>, .$ {
-      item
-    }
-
-    <%
-  }
-
-);
-
-%> {
+.<%=familyName%><% _.forEach(classNameList, function(item) {%>, .<%=item%><%});%> 
+{
   font-family: '<%=familyName%>' !important;
   font-size: 13px;
   font-style: normal;
@@ -45,17 +36,8 @@
   overflow: hidden;
 }
 
-<% _.forEach(icons, function(icon) {
-    %> .icon-$ {
-      icon.fontName
-    }
-
-    ::before {
-      content: '\${icon.code}';
-    }
-
-    <%
-  }
-
-);
-%>
+<% _.forEach(icons, function(icon) {%> 
+.icon-<%=icon.fontName%>::before {
+  content: '\\<%=icon.code%>';
+}
+<%});%>
