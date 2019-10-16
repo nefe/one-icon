@@ -38,6 +38,6 @@
 
 <% _.forEach(icons, function(icon) {%> 
 .icon-<%=icon.fontName%>::before {
-  content: '\\<%=icon.code%>';
+  content: '\<%=icon.code%>';
 }
 <%});%>
