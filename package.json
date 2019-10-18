@@ -4,7 +4,7 @@
   "description": "",
   "main": "./lib/icon.js",
   "bin": {
-    "icon": "index.js"
+    "icon": "main.js"
   },
   "scripts": {
     "build": "tsc && tsc -p nodeTsconfig.json",
