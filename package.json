@@ -1,6 +1,6 @@
 {
   "name": "one-icon",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "",
   "main": "./lib/icon.js",
   "bin": {
@@ -17,7 +17,7 @@
   "files": [
     "lib",
     "bin",
-    "index.js",
+    "main.js",
     "*.md",
     "template.html",
     "template.scss",
