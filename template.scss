@@ -13,7 +13,7 @@
     url('<%=svg%>#<%=familyName%>') format('svg');
 }
 
-.<%=familyName%>, .<%=familyName%><% _.forEach(classNameList, function(item) {%>.<%=item%><%});%> 
+.<%=familyName%>
 {
   font-family: '<%=familyName%>' !important;
   font-size: 13px;
@@ -37,7 +37,7 @@
 }
  
 <% _.forEach(icons, function(icon) {%> 
-<% _.forEach(classNameList, function(item) {%>.<%=item%><%});%>.icon-<%=icon.fontName%>::before {
+.icon-<%=icon.fontName%>::before, .<%=familyName%>.icon-<%=icon.fontName%>::before {
   content: '\<%=icon.code%>';
 }
 <%});%> 
