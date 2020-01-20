@@ -153,6 +153,36 @@ export async function generateJsFile(projectList) {
   });
 }
 
+/** 下载SVG文件 */
+export async function generateSvgFile(projectList) {
+  projectList.forEach((project, i) => {
+    project.then(async item => {
+      // 配置项提供了svgOutputPath，才支持下载svg文件
+      if (!item.svgOutputPath) {
+        log.error('missing svgOutputPath config');
+        return;
+      }
+      log.info("开始生成SVG文件...");
+      /** 确保配置了正确的路径 */
+      processFolderPath(item.svgOutputPath);
+
+      const svgTemplate = fs.readFileSync(
+        path.join(__dirname, '../svgTemplate.js'),
+        'utf8'
+      );
+      const svgFileContent = _.template(svgTemplate)({ uniqueId: '', ...item });
+
+      try {
+        fs.writeFileSync(item.svgOutputPath, svgFileContent);
+      } catch (e) {
+        log.error('Failed in generating svg file: ');
+        throw Error(e);
+      }
+      log.info(`${item.name}项目svg文件生成成功！`);
+    });
+  });
+}
+
 
 /** 从文件完整路径中获取文件夹路径，比如a/b.ts -> a */
 function getFolderPath(filePath: string) {

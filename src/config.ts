@@ -27,6 +27,10 @@ interface Project {
   svgClassNameList?: string[];
   /** svg代码模板配置项 */
   svgIconCode?: string;
+  /** svg文件生成路径 */
+  svgOutputPath?: string;
+  /** 唯一id, 多项目svg id重合时加上的id */
+  uniqueId?: string;
 }
 
 /** 配置项 */

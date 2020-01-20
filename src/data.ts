@@ -50,11 +50,13 @@ export function getProjectList() {
   const resultList = projectList.map(async project => {
     const projectId = project.id;
     const item = await getProjectById(projectId);
+    const currentConfig = config.getConfigById(projectId);
 
     // 直接修改icon对象数据
     item.icons.forEach(icon => {
       icon.code = Number(icon.unicode).toString(16);
       icon.fontName = icon.font_class;
+      icon.svgName = `${currentConfig.uniqueId ? currentConfig.uniqueId + '_' : ''}icon_${icon.fontName.replace(/-/g, '_')}`;
     });
     return {
       eot: "https:" + item.font.eot_file,
@@ -65,7 +67,7 @@ export function getProjectList() {
       familyName: item.project.font_family,
       name: item.project.name,
       icons: item.icons,
-      ...config.getConfigById(projectId)
+      ...currentConfig
     };
   });
 
